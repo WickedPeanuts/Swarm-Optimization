@@ -15,8 +15,6 @@ namespace PSO
         public double[] PositionPBest { get; set; }
         public double[] Velocity { get; set; }
         public double PersonalBest { get; set; }
-        public double Fitness { get; set; }
-        public double FitnessPBest { get; set; }
 
         public static double GlobalBest { get; set; }
         public static double[] PositionGBest { get; set; }
@@ -149,11 +147,11 @@ namespace PSO
         protected virtual double CalculateFitness()
         {
             if (function == EFunction.Sphere)
-                return Fitness = BasicFunctions.SphereFunction(Position);
+                return BasicFunctions.SphereFunction(Position);
             else if (function == EFunction.RotatedRastrigin)
-                return Fitness = BasicFunctions.RotatedRastrigin(Position);
+                return BasicFunctions.RotatedRastrigin(Position);
             else
-                return Fitness = BasicFunctions.Rosenbrock(Position);
+                return BasicFunctions.Rosenbrock(Position);
         }
 
         public abstract void UpdateSpeed();
@@ -164,12 +162,12 @@ namespace PSO
             if (PersonalBest > newPBest)
             {
                 //Update PBest and current Position
-                FitnessPBest = newPBest;
                 PositionPBest = Position;
                 PersonalBest = newPBest;
 
                 if (GlobalBest > newPBest)
                 {
+                    Console.WriteLine("F: {0} To: {1}", GlobalBest, newPBest);
                     PositionGBest = Position;
                     GlobalBest = newPBest;
                 }

@@ -10,7 +10,7 @@ namespace Particle_Swarm_Optimization
     {
         public static readonly int PARTICLE_AMMOUNT = 30;
         public static readonly int DIMENSION_AMMOUNT = 30;
-        public static readonly int ITERATION_AMMOUNT = 100;
+        public static readonly int ITERATION_AMMOUNT = 10000;
         public static readonly int SAMPLE_COUNT = 30;
     }
 }

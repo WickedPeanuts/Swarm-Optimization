@@ -61,9 +61,10 @@ namespace Particle_Swarm_Optimization
                 pso[0] = (new Swarm(ETopology.Global, EFunction.Sphere, EParameter.FixedW));
                 pso[0].InitializeSwarm();
                 pso[0].UpdatePopulation();
-                //Console.WriteLine("Iteração " + i + ": GBest: " + AbstractParticle.GlobalBest);
-                Console.ReadKey();
+                Console.WriteLine("Iteração " + i + ": GBest: " + AbstractParticle.GlobalBest);
+                //Console.ReadKey();
             }
+            Console.ReadKey();
         }
     }
 }

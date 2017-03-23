@@ -44,7 +44,7 @@ namespace PSO
                      
 
                 }
-                Console.WriteLine("Iteração " + i + ": GBest: " + AbstractParticle.GlobalBest);
+                //Console.WriteLine("Iteração " + i + ": GBest: " + AbstractParticle.GlobalBest);
             }
         }
     }
