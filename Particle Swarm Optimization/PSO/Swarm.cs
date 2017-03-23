@@ -31,8 +31,12 @@ namespace PSO
             {
                 foreach(AbstractParticle particle in ParticleList)
                 {
+                    particle.UpdateSpeed();
                     particle.UpdatePosition();
+                    particle.ForceBoundaries();
+                    particle.UpdateFitness();
                 }
+                Console.WriteLine("Iteração " + i + ": GBest: " + AbstractParticle.GlobalBest);
             }
         }
     }

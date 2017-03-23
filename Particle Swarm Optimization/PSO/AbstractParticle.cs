@@ -13,6 +13,7 @@ namespace PSO
     {
         public double[] Position { get; set; }
         public double[] PositionPBest { get; set; }
+        public double[] Velocity { get; set; }
         public double PersonalBest { get; set; }
 
         public static double GlobalBest { get; set; }
@@ -56,6 +57,7 @@ namespace PSO
                 w = 0.9;
 
             Position = new double[Parameters.DIMENSION_AMMOUNT];
+            Velocity = new double[Parameters.DIMENSION_AMMOUNT];
         }
 
         public virtual void Initialize()
@@ -63,6 +65,7 @@ namespace PSO
             for (int i = 0; i < Position.Length; i++)
             {
                 Position[i] = random.NextDouble() * random.Next(BOUNDARY_MIN, BOUNDARY_MAX);
+                Velocity[i] = (BOUNDARY_MAX - BOUNDARY_MIN) * random.NextDouble() + BOUNDARY_MIN;
             }
 
             PositionPBest = Position;
@@ -74,7 +77,7 @@ namespace PSO
                 GlobalBest = PersonalBest;
             }
 
-            UpdateFitness(PersonalBest);
+            UpdateFitness();
         }
 
         public abstract void UpdatePosition();
@@ -103,28 +106,31 @@ namespace PSO
             return swarm;
         }
 
-        public void ForceBoundaries(double[] nextPosition, int i)
+        public void ForceBoundaries()
         {
-            if (function == EFunction.Sphere)
+            for (int i = 0; i < Parameters.DIMENSION_AMMOUNT; i++)
             {
-                if (nextPosition[i] > BasicFunctions.SPHERE_BOUNDARY_MAX)
-                    nextPosition[i] = BasicFunctions.SPHERE_BOUNDARY_MAX;
-                else if (nextPosition[i] < BasicFunctions.SPHERE_BOUNDARY_MIN)
-                    nextPosition[i] = BasicFunctions.SPHERE_BOUNDARY_MIN;
-            }
-            else if (function == EFunction.RotatedRastrigin)
-            {
-                if (nextPosition[i] > BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MAX)
-                    nextPosition[i] = BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MAX;
-                else if (nextPosition[i] < BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MIN)
-                    nextPosition[i] = BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MIN;
-            }
-            else if (function == EFunction.Rosenbrock)
-            {
-                if (nextPosition[i] > BasicFunctions.ROSENBROCK_BOUNDARY_MAX)
-                    nextPosition[i] = BasicFunctions.ROSENBROCK_BOUNDARY_MAX;
-                else if (nextPosition[i] < BasicFunctions.ROSENBROCK_BOUNDARY_MIN)
-                    nextPosition[i] = BasicFunctions.ROSENBROCK_BOUNDARY_MIN;
+                if (function == EFunction.Sphere)
+                {
+                    if (Position[i] > BasicFunctions.SPHERE_BOUNDARY_MAX)
+                        Position[i] = BasicFunctions.SPHERE_BOUNDARY_MAX;
+                    else if (Position[i] < BasicFunctions.SPHERE_BOUNDARY_MIN)
+                        Position[i] = BasicFunctions.SPHERE_BOUNDARY_MIN;
+                }
+                else if (function == EFunction.RotatedRastrigin)
+                {
+                    if (Position[i] > BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MAX)
+                        Position[i] = BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MAX;
+                    else if (Position[i] < BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MIN)
+                        Position[i] = BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MIN;
+                }
+                else if (function == EFunction.Rosenbrock)
+                {
+                    if (Position[i] > BasicFunctions.ROSENBROCK_BOUNDARY_MAX)
+                        Position[i] = BasicFunctions.ROSENBROCK_BOUNDARY_MAX;
+                    else if (Position[i] < BasicFunctions.ROSENBROCK_BOUNDARY_MIN)
+                        Position[i] = BasicFunctions.ROSENBROCK_BOUNDARY_MIN;
+                }
             }
         }
 
@@ -138,8 +144,23 @@ namespace PSO
                 return BasicFunctions.Rosenbrock(Position);
         }
 
-        protected abstract double[] GenerateNextPosition();
+        public abstract void UpdateSpeed();
 
-        protected abstract void UpdateFitness(double newPBest);
+        public void UpdateFitness()
+        {
+            double newPBest = calculateFitness();
+            if (PersonalBest > newPBest)
+            {
+                //Update PBest and current Position
+                PositionPBest = Position;
+                PersonalBest = newPBest;
+
+                if (GlobalBest > newPBest)
+                {
+                    PositionGBest = Position;
+                    GlobalBest = newPBest;
+                }
+            }
+        }
     }
 }

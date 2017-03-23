@@ -22,57 +22,28 @@ namespace PSO
 
         public override void UpdatePosition()
         {
-            double[] nextPosition = GenerateNextPosition();
-            if (nextPosition[0] == 50 || nextPosition[0] == -50)
+            for (int i = 0; i< Parameters.DIMENSION_AMMOUNT; i++)
             {
-                int i = 10;
-            }
-            Position = GenerateNextPosition();
-
-            UpdateFitness(
-                    calculateFitness()
-                );
-        }
-
-        protected override void UpdateFitness(double newPBest)
-        {
-            if (PersonalBest > newPBest)
-            {
-                //Update PBest and current Position
-                PositionPBest = Position;
-                PersonalBest = newPBest;
-
-                if (GlobalBest > newPBest)
-                {
-                    PositionGBest = Position;
-                    GlobalBest = newPBest;
-                }
+                Position[i] += Velocity[i];
             }
         }
 
-        protected override double[] GenerateNextPosition()
+        public override void UpdateSpeed()
         {
-            double[] nextPosition = new double[Position.Length];
-
-            for (int i = 0; i < nextPosition.Length; i++)
+            for (int i = 0; i < Parameters.DIMENSION_AMMOUNT; i++)
             {
                 /*
-                 * Próx Posição[Eixo] = Velocidade * Posição Atual [Eixo] +
+                 * Velocidade [Eixo] = Position [Eixo] * Velocidade Atual [Eixo] +
                  *                      Const1 * Random(0,1) * (Posição Atual - Posição G Best) +
                  *                      Const2 * Random(0,1) * (Posição Atual - Posição P Best);
                  */
-                nextPosition[i] = w * Position[i] +
-                    C1 * random.NextDouble() * (Position[i] - PositionPBest[i]) +
-                    C2 * random.NextDouble() * (Position[i] - PositionGBest[i]);
-
-                ForceBoundaries(nextPosition, i);
+                Velocity[i] = w * Velocity[i] +
+                    C1 * random.NextDouble() * (PositionPBest[i] - Position[i]) +
+                    C2 * random.NextDouble() * (PositionGBest[i] - Position[i]);
 
                 if (parameter == EParameter.FloatingW)
                     w -= WF;
-
             }
-
-            return nextPosition;
         }
     }
 }
