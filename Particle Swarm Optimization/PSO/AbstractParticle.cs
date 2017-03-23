@@ -15,6 +15,8 @@ namespace PSO
         public double[] PositionPBest { get; set; }
         public double[] Velocity { get; set; }
         public double PersonalBest { get; set; }
+        public double Fitness { get; set; }
+        public double FitnessPBest { get; set; }
 
         public static double GlobalBest { get; set; }
         public static double[] PositionGBest { get; set; }
@@ -27,11 +29,17 @@ namespace PSO
 
         protected double w = 0;
 
-        protected Random random = new Random();
+        protected static Random random = new Random();
 
         protected static readonly double C1 = 2.05;
         protected static readonly double C2 = 2.05;
         protected static readonly double WF = 0.5 / Parameters.ITERATION_AMMOUNT;
+
+        public static void ClearStaticFields()
+        {
+            GlobalBest = 0;
+            PositionGBest = null;
+        }
         
         public AbstractParticle(EFunction function, EParameter parameter)
         {
@@ -62,14 +70,18 @@ namespace PSO
 
         public virtual void Initialize()
         {
+            double high = BOUNDARY_MAX * 0.1;
+            double low = BOUNDARY_MIN * 0.1;
+
             for (int i = 0; i < Position.Length; i++)
             {
                 Position[i] = random.NextDouble() * random.Next(BOUNDARY_MIN, BOUNDARY_MAX);
-                Velocity[i] = (BOUNDARY_MAX - BOUNDARY_MIN) * random.NextDouble() + BOUNDARY_MIN;
+                Velocity[i] = (high - low) * random.NextDouble() + low;
             }
 
             PositionPBest = Position;
-            PersonalBest = calculateFitness();
+
+            PersonalBest = CalculateFitness();
 
             if (GlobalBest == 0 && PositionGBest == null)
             {
@@ -134,24 +146,25 @@ namespace PSO
             }
         }
 
-        protected virtual double calculateFitness()
+        protected virtual double CalculateFitness()
         {
             if (function == EFunction.Sphere)
-                return BasicFunctions.SphereFunction(Position);
+                return Fitness = BasicFunctions.SphereFunction(Position);
             else if (function == EFunction.RotatedRastrigin)
-                return BasicFunctions.RotatedRastrigin(Position);
+                return Fitness = BasicFunctions.RotatedRastrigin(Position);
             else
-                return BasicFunctions.Rosenbrock(Position);
+                return Fitness = BasicFunctions.Rosenbrock(Position);
         }
 
         public abstract void UpdateSpeed();
 
         public void UpdateFitness()
         {
-            double newPBest = calculateFitness();
+            double newPBest = CalculateFitness();
             if (PersonalBest > newPBest)
             {
                 //Update PBest and current Position
+                FitnessPBest = newPBest;
                 PositionPBest = Position;
                 PersonalBest = newPBest;
 
