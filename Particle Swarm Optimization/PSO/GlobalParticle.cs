@@ -15,8 +15,8 @@ namespace PSO
         
         public GlobalParticle(EFunction function, EParameter parameter, List<AbstractParticle> swarm) : base(function, parameter)
         {
-            this.function = function;
-            this.parameter = parameter;
+            this.functionType = function;
+            this.parameterType = parameter;
             this.Swarm = swarm;
         }
 
@@ -41,7 +41,7 @@ namespace PSO
                     C1 * random.NextDouble() * (PositionPBest[i] - Position[i]) +
                     C2 * random.NextDouble() * (PositionGBest[i] - Position[i]);
 
-                if (parameter == EParameter.FloatingW)
+                if (parameterType == EParameter.FloatingW)
                     w -= WF;
             }
         }

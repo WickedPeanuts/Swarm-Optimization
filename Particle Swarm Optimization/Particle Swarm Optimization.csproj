@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FitnessFunction\BasicFunctions.cs" />
+    <Compile Include="FitnessFunction\AbstractFunction.cs" />
+    <Compile Include="FitnessFunction\Rosenbrock.cs" />
+    <Compile Include="FitnessFunction\RotatedRastrigin.cs" />
+    <Compile Include="FitnessFunction\SphereFunction.cs" />
     <Compile Include="Parameters.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

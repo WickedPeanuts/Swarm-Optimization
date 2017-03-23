@@ -18,14 +18,12 @@ namespace PSO
 
         public static double GlobalBest { get; set; }
         public static double[] PositionGBest { get; set; }
-
-        protected static int BOUNDARY_MAX;
-        protected static int BOUNDARY_MIN;
-
-        protected EFunction function;
-        protected EParameter parameter;
+        
+        protected EFunction functionType;
+        protected EParameter parameterType;
 
         protected double w = 0;
+        protected AbstractFunction function;
 
         protected static Random random = new Random();
 
@@ -39,24 +37,8 @@ namespace PSO
             PositionGBest = null;
         }
         
-        public AbstractParticle(EFunction function, EParameter parameter)
+        public AbstractParticle(EFunction functionType, EParameter parameter)
         {
-            if (function == EFunction.Sphere)
-            {
-                BOUNDARY_MAX = BasicFunctions.SPHERE_BOUNDARY_MAX;
-                BOUNDARY_MIN = BasicFunctions.SPHERE_BOUNDARY_MIN;
-            }
-            else if (function == EFunction.Rosenbrock)
-            {
-                BOUNDARY_MAX = BasicFunctions.ROSENBROCK_BOUNDARY_MAX;
-                BOUNDARY_MIN = BasicFunctions.ROSENBROCK_BOUNDARY_MIN;
-            }
-            else if (function == EFunction.RotatedRastrigin)
-            {
-                BOUNDARY_MAX = BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MAX;
-                BOUNDARY_MIN = BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MIN;
-            }
-
             if (parameter == EParameter.FixedW)
                 w = 0.8;
             else if (parameter == EParameter.FloatingW)
@@ -64,22 +46,30 @@ namespace PSO
 
             Position = new double[Parameters.DIMENSION_AMMOUNT];
             Velocity = new double[Parameters.DIMENSION_AMMOUNT];
+
+            if (functionType == EFunction.Sphere)
+                function = new SphereFunction();
+            else if (functionType == EFunction.RotatedRastrigin)
+                function = new RotatedRastrigin();
+            else
+                function = new Rosenbrock();
+            
         }
 
         public virtual void Initialize()
         {
-            double high = BOUNDARY_MAX * 0.1;
-            double low = BOUNDARY_MIN * 0.1;
+            double high = function.BOUNDARY_MAX * 0.1;
+            double low = function.BOUNDARY_MIN * 0.1;
 
             for (int i = 0; i < Position.Length; i++)
             {
-                Position[i] = random.NextDouble() * random.Next(BOUNDARY_MIN, BOUNDARY_MAX);
+                Position[i] = (function.BOUNDARY_MAX - function.BOUNDARY_MIN) * random.NextDouble() + function.BOUNDARY_MIN;
                 Velocity[i] = (high - low) * random.NextDouble() + low;
             }
 
             PositionPBest = Position;
 
-            PersonalBest = CalculateFitness();
+            PersonalBest = function.CalculateFitness(Position);
 
             if (GlobalBest == 0 && PositionGBest == null)
             {
@@ -120,52 +110,25 @@ namespace PSO
         {
             for (int i = 0; i < Parameters.DIMENSION_AMMOUNT; i++)
             {
-                if (function == EFunction.Sphere)
-                {
-                    if (Position[i] > BasicFunctions.SPHERE_BOUNDARY_MAX)
-                        Position[i] = BasicFunctions.SPHERE_BOUNDARY_MAX;
-                    else if (Position[i] < BasicFunctions.SPHERE_BOUNDARY_MIN)
-                        Position[i] = BasicFunctions.SPHERE_BOUNDARY_MIN;
-                }
-                else if (function == EFunction.RotatedRastrigin)
-                {
-                    if (Position[i] > BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MAX)
-                        Position[i] = BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MAX;
-                    else if (Position[i] < BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MIN)
-                        Position[i] = BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MIN;
-                }
-                else if (function == EFunction.Rosenbrock)
-                {
-                    if (Position[i] > BasicFunctions.ROSENBROCK_BOUNDARY_MAX)
-                        Position[i] = BasicFunctions.ROSENBROCK_BOUNDARY_MAX;
-                    else if (Position[i] < BasicFunctions.ROSENBROCK_BOUNDARY_MIN)
-                        Position[i] = BasicFunctions.ROSENBROCK_BOUNDARY_MIN;
-                }
+                    if (Position[i] > AbstractFunction.SPHERE_BOUNDARY_MAX)
+                    Position[i] = AbstractFunction.SPHERE_BOUNDARY_MAX;
+                else if (Position[i] < AbstractFunction.SPHERE_BOUNDARY_MIN)
+                    Position[i] = AbstractFunction.SPHERE_BOUNDARY_MIN;
             }
-        }
-
-        protected virtual double CalculateFitness()
-        {
-            if (function == EFunction.Sphere)
-                return BasicFunctions.SphereFunction(Position);
-            else if (function == EFunction.RotatedRastrigin)
-                return BasicFunctions.RotatedRastrigin(Position);
-            else
-                return BasicFunctions.Rosenbrock(Position);
         }
 
         public abstract void UpdateSpeed();
 
         public void UpdateFitness()
         {
-            double newPBest = CalculateFitness();
-            if (PersonalBest > newPBest)
+            double newPBest = function.CalculateFitness(Position);
+            if (PersonalBest < newPBest)
             {
                 //Update PBest and current Position
                 PositionPBest = Position;
                 PersonalBest = newPBest;
 
-                if (GlobalBest > newPBest)
+                if (GlobalBest < newPBest)
                 {
                     Console.WriteLine("F: {0} To: {1}", GlobalBest, newPBest);
                     PositionGBest = Position;
