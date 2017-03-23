@@ -22,6 +22,11 @@ namespace PSO
 
         public override void UpdatePosition()
         {
+            double[] nextPosition = GenerateNextPosition();
+            if (nextPosition[0] == 50 || nextPosition[0] == -50)
+            {
+                int i = 10;
+            }
             Position = GenerateNextPosition();
 
             UpdateFitness(
@@ -59,6 +64,8 @@ namespace PSO
                 nextPosition[i] = w * Position[i] +
                     C1 * random.NextDouble() * (Position[i] - PositionPBest[i]) +
                     C2 * random.NextDouble() * (Position[i] - PositionGBest[i]);
+
+                ForceBoundaries(nextPosition, i);
 
                 if (parameter == EParameter.FloatingW)
                     w -= WF;

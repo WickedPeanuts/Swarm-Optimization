@@ -103,6 +103,31 @@ namespace PSO
             return swarm;
         }
 
+        public void ForceBoundaries(double[] nextPosition, int i)
+        {
+            if (function == EFunction.Sphere)
+            {
+                if (nextPosition[i] > BasicFunctions.SPHERE_BOUNDARY_MAX)
+                    nextPosition[i] = BasicFunctions.SPHERE_BOUNDARY_MAX;
+                else if (nextPosition[i] < BasicFunctions.SPHERE_BOUNDARY_MIN)
+                    nextPosition[i] = BasicFunctions.SPHERE_BOUNDARY_MIN;
+            }
+            else if (function == EFunction.RotatedRastrigin)
+            {
+                if (nextPosition[i] > BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MAX)
+                    nextPosition[i] = BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MAX;
+                else if (nextPosition[i] < BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MIN)
+                    nextPosition[i] = BasicFunctions.ROTATEDRASTRIGIN_BOUNDARY_MIN;
+            }
+            else if (function == EFunction.Rosenbrock)
+            {
+                if (nextPosition[i] > BasicFunctions.ROSENBROCK_BOUNDARY_MAX)
+                    nextPosition[i] = BasicFunctions.ROSENBROCK_BOUNDARY_MAX;
+                else if (nextPosition[i] < BasicFunctions.ROSENBROCK_BOUNDARY_MIN)
+                    nextPosition[i] = BasicFunctions.ROSENBROCK_BOUNDARY_MIN;
+            }
+        }
+
         protected virtual double calculateFitness()
         {
             if (function == EFunction.Sphere)

@@ -8,8 +8,8 @@ namespace Particle_Swarm_Optimization.FitnessFunction
 {
     public class BasicFunctions
     {
-        public const int SPHERE_BOUNDARY_MAX = 100;
-        public const int SPHERE_BOUNDARY_MIN = -100;
+        public const int SPHERE_BOUNDARY_MAX = 50;
+        public const int SPHERE_BOUNDARY_MIN = -50;
 
         public const int ROTATEDRASTRIGIN_BOUNDARY_MAX = 100;
         public const int ROTATEDRASTRIGIN_BOUNDARY_MIN = -100;
