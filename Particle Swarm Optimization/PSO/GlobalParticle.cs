@@ -23,8 +23,10 @@ namespace PSO
         public override void UpdatePosition()
         {
             Position = GenerateNextPosition();
-            double newPBest = calculateFitness();
-            UpdateFitness(newPBest);
+
+            UpdateFitness(
+                    calculateFitness()
+                );
         }
 
         protected override void UpdateFitness(double newPBest)
@@ -51,12 +53,12 @@ namespace PSO
             {
                 /*
                  * Próx Posição[Eixo] = Velocidade * Posição Atual [Eixo] +
-                 *                      Const1 * Random(0->1) * (Posição Atual - Posição G Best) +
-                 *                      Const2 * Random(0->1) * (
+                 *                      Const1 * Random(0,1) * (Posição Atual - Posição G Best) +
+                 *                      Const2 * Random(0,1) * (Posição Atual - Posição P Best);
                  */
                 nextPosition[i] = w * Position[i] +
-                    C1 * random.NextDouble() * (PositionPBest[i] - Position[i]) +
-                    C2 * random.NextDouble() * (PositionGBest[i] - Position[i]);
+                    C1 * random.NextDouble() * (Position[i] - PositionPBest[i]) +
+                    C2 * random.NextDouble() * (Position[i] - PositionGBest[i]);
 
                 if (parameter == EParameter.FloatingW)
                     w -= WF;
