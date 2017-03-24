@@ -11,15 +11,6 @@ namespace Particle_Swarm_Optimization.FitnessFunction
         public abstract float BOUNDARY_MAX { get; }
         public abstract float BOUNDARY_MIN { get; }
 
-        public const int SPHERE_BOUNDARY_MAX = 50;
-        public const int SPHERE_BOUNDARY_MIN = -50;
-
-        public const int ROTATEDRASTRIGIN_BOUNDARY_MAX = 100;
-        public const int ROTATEDRASTRIGIN_BOUNDARY_MIN = -100;
-
-        public const int ROSENBROCK_BOUNDARY_MAX = 100;
-        public const int ROSENBROCK_BOUNDARY_MIN = -100;
-
         public abstract double CalculateFitness(double[] position);
 
         public static double EuclidianDistance(double[] a, double[] b)

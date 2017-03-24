@@ -110,10 +110,10 @@ namespace PSO
         {
             for (int i = 0; i < Parameters.DIMENSION_AMMOUNT; i++)
             {
-                    if (Position[i] > AbstractFunction.SPHERE_BOUNDARY_MAX)
-                    Position[i] = AbstractFunction.SPHERE_BOUNDARY_MAX;
-                else if (Position[i] < AbstractFunction.SPHERE_BOUNDARY_MIN)
-                    Position[i] = AbstractFunction.SPHERE_BOUNDARY_MIN;
+                if (Position[i] > function.BOUNDARY_MAX)
+                    Position[i] = function.BOUNDARY_MAX;
+                else if (Position[i] < function.BOUNDARY_MIN)
+                    Position[i] = function.BOUNDARY_MIN;
             }
         }
 
@@ -122,13 +122,13 @@ namespace PSO
         public void UpdateFitness()
         {
             double newPBest = function.CalculateFitness(Position);
-            if (PersonalBest < newPBest)
+            if (PersonalBest > newPBest)
             {
                 //Update PBest and current Position
                 PositionPBest = Position;
                 PersonalBest = newPBest;
 
-                if (GlobalBest < newPBest)
+                if (GlobalBest > newPBest)
                 {
                     Console.WriteLine("F: {0} To: {1}", GlobalBest, newPBest);
                     PositionGBest = Position;
