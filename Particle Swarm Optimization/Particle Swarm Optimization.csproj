@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstrictionFactor\AbstractConstrictionFactor.cs" />
+    <Compile Include="ConstrictionFactor\ClercConstriction.cs" />
+    <Compile Include="ConstrictionFactor\FixedInertia.cs" />
+    <Compile Include="ConstrictionFactor\FloatingInertia.cs" />
     <Compile Include="FitnessFunction\AbstractFunction.cs" />
     <Compile Include="FitnessFunction\Rosenbrock.cs" />
     <Compile Include="FitnessFunction\RotatedRastrigin.cs" />
@@ -51,7 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PSO\AbstractParticle.cs" />
     <Compile Include="PSO\Enum\EFunction.cs" />
-    <Compile Include="PSO\Enum\EParameter.cs" />
+    <Compile Include="PSO\Enum\EConstrictionFactor.cs" />
     <Compile Include="PSO\Enum\ETopology.cs" />
     <Compile Include="PSO\GlobalParticle.cs" />
     <Compile Include="PSO\Swarm.cs" />
@@ -59,5 +63,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

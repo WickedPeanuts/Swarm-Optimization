@@ -1,4 +1,5 @@
 ﻿using Particle_Swarm_Optimization;
+using Particle_Swarm_Optimization.ConstrictionFactor;
 using Particle_Swarm_Optimization.FitnessFunction;
 using PSO.Enum;
 using System;
@@ -20,16 +21,12 @@ namespace PSO
         public static double[] PositionGBest { get; set; }
         
         protected EFunction functionType;
-        protected EParameter parameterType;
+        protected EConstrictionFactor constrictionType;
 
-        protected double w = 0;
         protected AbstractFunction function;
+        protected AbstractConstrictionFactor constriction;
 
         protected static Random random = new Random();
-
-        protected static readonly double C1 = 2.05;
-        protected static readonly double C2 = 2.05;
-        protected static readonly double WF = 0.5 / Parameters.ITERATION_AMMOUNT;
 
         public static void ClearStaticFields()
         {
@@ -37,12 +34,14 @@ namespace PSO
             PositionGBest = null;
         }
         
-        public AbstractParticle(EFunction functionType, EParameter parameter)
+        public AbstractParticle(EFunction functionType, EConstrictionFactor parameter)
         {
-            if (parameter == EParameter.FixedW)
-                w = 0.8;
-            else if (parameter == EParameter.FloatingW)
-                w = 0.9;
+            if (parameter == EConstrictionFactor.FixedInertia)
+                constriction = new FixedInertia();
+            else if (parameter == EConstrictionFactor.FloatingInertia)
+                constriction = new FloatingInertia();
+            else
+                constriction = new ClercConstriction();
 
             Position = new double[Parameters.DIMENSION_AMMOUNT];
             Velocity = new double[Parameters.DIMENSION_AMMOUNT];
@@ -67,13 +66,13 @@ namespace PSO
                 Velocity[i] = (high - low) * random.NextDouble() + low;
             }
 
-            PositionPBest = Position;
+            PositionPBest = (double[])Position.Clone();
 
             PersonalBest = function.CalculateFitness(Position);
 
             if (GlobalBest == 0 && PositionGBest == null)
             {
-                PositionGBest = PositionPBest;
+                PositionGBest = (double[])PositionPBest.Clone();
                 GlobalBest = PersonalBest;
             }
 
@@ -82,7 +81,7 @@ namespace PSO
 
         public abstract void UpdatePosition();
         
-        public static List<AbstractParticle> CreateSwarm(ETopology topology, EFunction function, EParameter parameter, int particleAmmount)
+        public static List<AbstractParticle> CreateSwarm(ETopology topology, EFunction function, EConstrictionFactor constrictionFactor, int particleAmmount)
         {
             List<AbstractParticle> swarm = new List<AbstractParticle>();
 
@@ -94,7 +93,7 @@ namespace PSO
 
                     for (int i = 0; i < particleAmmount; i++)
                     {
-                        swarm.Add(new GlobalParticle(function, parameter, swarm));
+                        swarm.Add(new GlobalParticle(function, constrictionFactor, swarm));
                     }
 
                     break;
@@ -125,13 +124,13 @@ namespace PSO
             if (PersonalBest > newPBest)
             {
                 //Update PBest and current Position
-                PositionPBest = Position;
+                PositionPBest = (double[])Position.Clone();
                 PersonalBest = newPBest;
 
                 if (GlobalBest > newPBest)
                 {
-                    Console.WriteLine("F: {0} To: {1}", GlobalBest, newPBest);
-                    PositionGBest = Position;
+                    //Console.WriteLine("F: {0} To: {1}", GlobalBest, newPBest);
+                    PositionGBest = (double[])Position.Clone();
                     GlobalBest = newPBest;
                 }
             }

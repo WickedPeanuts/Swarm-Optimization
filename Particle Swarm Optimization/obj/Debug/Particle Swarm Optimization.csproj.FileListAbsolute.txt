@@ -4,3 +4,9 @@ c:\users\carlo\Documentos\Visual Studio 2017\Projects\Particle Swarm Optimizatio
 c:\users\carlo\Documentos\Visual Studio 2017\Projects\Particle Swarm Optimization\Particle Swarm Optimization\bin\Debug\Particle Swarm Optimization.pdb
 c:\users\carlo\Documentos\Visual Studio 2017\Projects\Particle Swarm Optimization\Particle Swarm Optimization\obj\Debug\Particle Swarm Optimization.exe
 c:\users\carlo\Documentos\Visual Studio 2017\Projects\Particle Swarm Optimization\Particle Swarm Optimization\obj\Debug\Particle Swarm Optimization.pdb
+C:\Users\Carlo\Documents\Visual Studio 2017\Projects\Particle-Swarm-Optimization\Particle Swarm Optimization\bin\Debug\Particle Swarm Optimization.exe.config
+C:\Users\Carlo\Documents\Visual Studio 2017\Projects\Particle-Swarm-Optimization\Particle Swarm Optimization\bin\Debug\Particle Swarm Optimization.exe
+C:\Users\Carlo\Documents\Visual Studio 2017\Projects\Particle-Swarm-Optimization\Particle Swarm Optimization\bin\Debug\Particle Swarm Optimization.pdb
+C:\Users\Carlo\Documents\Visual Studio 2017\Projects\Particle-Swarm-Optimization\Particle Swarm Optimization\obj\Debug\Particle Swarm Optimization.csprojResolveAssemblyReference.cache
+C:\Users\Carlo\Documents\Visual Studio 2017\Projects\Particle-Swarm-Optimization\Particle Swarm Optimization\obj\Debug\Particle Swarm Optimization.exe
+C:\Users\Carlo\Documents\Visual Studio 2017\Projects\Particle-Swarm-Optimization\Particle Swarm Optimization\obj\Debug\Particle Swarm Optimization.pdb

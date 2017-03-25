@@ -11,11 +11,12 @@ namespace PSO
     public class Swarm
     {
         public List<AbstractParticle> ParticleList { get; set; }
+        public List<double> GlobalBestLog { get; set; }
 
-        public Swarm(ETopology topology, EFunction function, EParameter parameter)
+        public Swarm(ETopology topology, EFunction function, EConstrictionFactor constrictionFactor)
         {
             AbstractParticle.ClearStaticFields();
-            ParticleList = AbstractParticle.CreateSwarm(topology, function, parameter, Parameters.PARTICLE_AMMOUNT);
+            ParticleList = AbstractParticle.CreateSwarm(topology, function, constrictionFactor, Parameters.PARTICLE_AMMOUNT);
         }
 
         public void InitializeSwarm()
@@ -26,8 +27,11 @@ namespace PSO
             }
         }
 
-        public void UpdatePopulation()
+        public void UpdatePopulation(bool saveFitnessLog = false)
         {
+            if (saveFitnessLog)
+                GlobalBestLog = new List<double>();
+
             for (int i = 0; i < Parameters.ITERATION_AMMOUNT; i++)
             {
                 foreach(AbstractParticle particle in ParticleList)
@@ -44,8 +48,18 @@ namespace PSO
                      
 
                 }
-                //Console.WriteLine("Iteração " + i + ": GBest: " + AbstractParticle.GlobalBest);
+
+                if (saveFitnessLog)
+                {
+                    GlobalBestLog.Add(AbstractParticle.GlobalBest);
+                }
+                
             }
+        }
+
+        public void UpdatePopulation(List<String> resultList)
+        {
+
         }
     }
 }

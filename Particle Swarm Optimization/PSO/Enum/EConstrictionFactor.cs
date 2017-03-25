@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PSO.Enum
 {
-    public enum EParameter
+    public enum EConstrictionFactor
     {
-        FixedW = 1,
-        FloatingW = 2,
+        FixedInertia = 1,
+        FloatingInertia = 2,
         ClercConstriction = 3,
     }
 }

@@ -13,10 +13,10 @@ namespace PSO
     {
         public List<AbstractParticle> Swarm { get; set; }
         
-        public GlobalParticle(EFunction function, EParameter parameter, List<AbstractParticle> swarm) : base(function, parameter)
+        public GlobalParticle(EFunction function, EConstrictionFactor constrictionFactor, List<AbstractParticle> swarm) : base(function, constrictionFactor)
         {
             this.functionType = function;
-            this.parameterType = parameter;
+            this.constrictionType = constrictionFactor;
             this.Swarm = swarm;
         }
 
@@ -26,23 +26,15 @@ namespace PSO
             {
                 Position[i] += Velocity[i];
             }
+
+            constriction.UpdateParameter();
         }
 
         public override void UpdateSpeed()
         {
             for (int i = 0; i < Parameters.DIMENSION_AMMOUNT; i++)
             {
-                /*
-                 * Velocidade [Eixo] = Position [Eixo] * Velocidade Atual [Eixo] +
-                 *                      Const1 * Random(0,1) * (Posição Atual - Posição G Best) +
-                 *                      Const2 * Random(0,1) * (Posição Atual - Posição P Best);
-                 */
-                Velocity[i] = w * Velocity[i] +
-                    C1 * random.NextDouble() * (PositionPBest[i] - Position[i]) +
-                    C2 * random.NextDouble() * (PositionGBest[i] - Position[i]);
-
-                if (parameterType == EParameter.FloatingW)
-                    w -= WF;
+                Velocity[i] = constriction.CalculateVelocity(Velocity[i], random.NextDouble(), random.NextDouble(), Position[i], PositionGBest[i], PositionPBest[i]);
             }
         }
     }
