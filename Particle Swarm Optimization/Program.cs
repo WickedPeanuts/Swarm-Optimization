@@ -14,59 +14,8 @@ namespace Particle_Swarm_Optimization
     {
         static void Main(string[] args)
         {
-            List<Swarm> pso = new List<Swarm>();
+            //int i = 0;
 
-            //Global
-            //pso.Add(new Swarm(ETopology.Global, EFunction.Sphere, EConstrictionFactor.FixedInertia)); Done!
-            //pso.Add(new Swarm(ETopology.Global, EFunction.Sphere, EConstrictionFactor.FloatingInertia)); Done!
-            //pso.Add(new Swarm(ETopology.Global, EFunction.Sphere, EConstrictionFactor.ClercConstriction)); Done!
-
-            //pso.Add(new Swarm(ETopology.Global, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia)); Done!
-            //pso.Add(new Swarm(ETopology.Global, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia)); Done!
-            //pso.Add(new Swarm(ETopology.Global, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction)); Done!
-
-            //pso.Add(new Swarm(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia)); Done!
-            //pso.Add(new Swarm(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia)); Done!
-            //pso.Add(new Swarm(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction)); Done!
-
-            //Local
-            //pso.Add(new Swarm(ETopology.Local, EFunction.Sphere, EConstrictionFactor.FixedInertia));
-            //pso.Add(new Swarm(ETopology.Local, EFunction.Sphere, EConstrictionFactor.FloatingInertia));
-            //pso.Add(new Swarm(ETopology.Local, EFunction.Sphere, EConstrictionFactor.ClercConstriction));
-
-            //pso.Add(new Swarm(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia));
-            //pso.Add(new Swarm(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia));
-            //pso.Add(new Swarm(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction));
-            
-            if (false)
-            {
-                //Focal
-                pso.Add(new Swarm(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.FixedInertia));
-                pso.Add(new Swarm(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.FloatingInertia));
-                pso.Add(new Swarm(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.ClercConstriction));
-
-                pso.Add(new Swarm(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia));
-                pso.Add(new Swarm(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia));
-                pso.Add(new Swarm(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction));
-
-                pso.Add(new Swarm(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia));
-                pso.Add(new Swarm(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia));
-                pso.Add(new Swarm(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction));
-
-                //Local
-                pso.Add(new Swarm(ETopology.Local, EFunction.Sphere, EConstrictionFactor.FixedInertia));
-                pso.Add(new Swarm(ETopology.Local, EFunction.Sphere, EConstrictionFactor.FloatingInertia));
-                pso.Add(new Swarm(ETopology.Local, EFunction.Sphere, EConstrictionFactor.ClercConstriction));
-
-                pso.Add(new Swarm(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia));
-                pso.Add(new Swarm(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia));
-                pso.Add(new Swarm(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction));
-
-                pso.Add(new Swarm(ETopology.Local, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia));
-                pso.Add(new Swarm(ETopology.Local, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia));
-                pso.Add(new Swarm(ETopology.Local, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction));
-            }
-            int i = 0;
             //Global
             //BeginSimulation(ETopology.Global, EFunction.Sphere, EConstrictionFactor.FixedInertia, i++);
             //BeginSimulation(ETopology.Global, EFunction.Sphere, EConstrictionFactor.FloatingInertia, i++);
@@ -78,13 +27,13 @@ namespace Particle_Swarm_Optimization
 
             //BeginSimulation(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia, i++);
             //BeginSimulation(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia, i++);
-            //BeginSimulation(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
+            ///BeginSimulation(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
 
             //Local
-            //BeginSimulation(ETopology.Local, EFunction.Sphere, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulation(ETopology.Local, EFunction.Sphere, EConstrictionFactor.FixedInertia, 1);
             //BeginSimulation(ETopology.Local, EFunction.Sphere, EConstrictionFactor.FloatingInertia, i++);
             //BeginSimulation(ETopology.Local, EFunction.Sphere, EConstrictionFactor.ClercConstriction, i++);
-
+            
             //BeginSimulation(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia, i++);
             //BeginSimulation(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia, i++);
             //BeginSimulation(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction, i++);
@@ -94,18 +43,17 @@ namespace Particle_Swarm_Optimization
             //BeginSimulation(ETopology.Local, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
 
             //Focal
-            BeginSimulation(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.FixedInertia, i++);
-            BeginSimulation(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.FloatingInertia, i++);
-            BeginSimulation(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.ClercConstriction, i++);
+            //BeginSimulation(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulation(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulation(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.ClercConstriction, i++);
 
-            BeginSimulation(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia, i++);
-            BeginSimulation(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia, i++);
-            BeginSimulation(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction, i++);
-
-            BeginSimulation(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia, i++);
-            BeginSimulation(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia, i++);
-            BeginSimulation(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
-
+            //BeginSimulation(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulation(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulation(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction, i++);
+            
+            //BeginSimulation(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulation(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulation(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
 
             //Console.ReadKey();
         }
@@ -125,7 +73,7 @@ namespace Particle_Swarm_Optimization
             }
 
 
-            SaveToFile(top, fun, cons, lld, id);
+            SaveToFile2(top, fun, cons, lld, id);
         }
 
         public static void SaveToFile(ETopology top, EFunction fun, EConstrictionFactor cons, List<List<Double>> outputSamples, int id)
@@ -154,23 +102,20 @@ namespace Particle_Swarm_Optimization
             System.IO.File.WriteAllLines(@"WriteLines" + top.ToString() + "," + fun.ToString() + "," + cons.ToString() + "," + id + ".txt", stringList.ToArray());
         }
 
-        public static void SaveToFile2(List<List<Double>> outputSamples, int id)
+        public static void SaveToFile2(ETopology top, EFunction fun, EConstrictionFactor cons, List<List<Double>> outputSamples, int id)
         {
             List<String> stringList = new List<string>();
 
             stringList.Add("Iterations\tFitness (Avergage from 30 samples)");
-
-            for (int i = 0; i < Parameters.ITERATION_AMOUNT; i++)
+            stringList.Add("{");
+            for (int i = 0; i < Parameters.SAMPLE_COUNT; i++)
             {
-                Double sum = 0d;
-                for (int j = 0; j < Parameters.PARTICLE_AMOUNT; j++)
-                {
-                    sum += outputSamples[j][i];
-                }
-                stringList.Add(i + "\t" + (sum / Parameters.PARTICLE_AMOUNT));
-            }
 
-            System.IO.File.WriteAllLines(@"WriteLines" + id + ".txt", stringList.ToArray());
+                stringList.Add((outputSamples[i][outputSamples[i].Count - 1]).ToString().Replace(',', '.') + ",");
+            }
+            stringList.Add("}");
+
+            System.IO.File.WriteAllLines(@"" + top + ", " + fun + ", " + cons + ", " + id + ".txt", stringList.ToArray());
         }
     }
 }

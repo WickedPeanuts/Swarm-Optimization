@@ -18,63 +18,22 @@ namespace Particle_Swarm_Optimization.PSO
             this.swarm = swarm;
         }
 
-        public override void UpdatePosition()
-        {
-            for (int i = 0; i < Parameters.DIMENSION_AMOUNT; i++)
-            {
-                Position[i] += Velocity[i];
-            }
-
-            constriction.UpdateParameter();
-        }
-
         public override void UpdateSpeed()
         {
-            //Selecting Adjacent Particles
-            Dictionary<int, double> adjacentParticlesDistance = new Dictionary<int, double>();
+            //Ordenar enxame por distancia
+            swarm.OrderBy(x => AbstractFunction.EuclidianDistance(this.Position, x.Position));
+            AbstractParticle bestParticle = swarm[0];
 
-            //Add Particles to dictionary
-            for(int i = 0; i < Parameters.PARTICLE_AMOUNT; i++)
+            //Selecionar partícula mais "relevante"
+            for (int i = 2; i < Parameters.FOCAL_ADJACENT_PARTICLES; i++)
             {
-                if (swarm[i] != this)
+                if (swarm[i].PersonalBest < bestParticle.PersonalBest)
                 {
-                    adjacentParticlesDistance.Add(i, AbstractFunction.EuclidianDistance(swarm[i].Position, Position));
+                    bestParticle = swarm[i];
                 }
             }
 
-            //Select N closest particles
-            AbstractParticle bestParticle = null;
-
-            for (int i = 0; i < Parameters.FOCAL_ADJACENT_PARTICLES; i++)
-            {
-                double lesserDistance = adjacentParticlesDistance.First(x => x.Key >= 0).Value;
-                int position = 0;
-                foreach(KeyValuePair<int, double> key in adjacentParticlesDistance)
-                {
-                    if (lesserDistance < adjacentParticlesDistance[key.Key])
-                    {
-                        lesserDistance = adjacentParticlesDistance[key.Key];
-                        position = key.Key;
-                    }
-                }
-
-                //Select the best particle
-                if (bestParticle != null)
-                {
-                    if (bestParticle.PersonalBest < swarm[position].PersonalBest)
-                        bestParticle = swarm[position];
-                }
-                else
-                {
-                    bestParticle = swarm[position];
-                }
-            }
-
-            //Verificar se bestParticle tem menos fitness
-            if (bestParticle.PersonalBest < this.PersonalBest)
-                bestParticle = this;
-
-            //Do the maths
+            //Fazer as matemágicas
             for (int i = 0; i<Parameters.DIMENSION_AMOUNT; i++)
             {
                 Velocity[i] = constriction.CalculateVelocity

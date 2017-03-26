@@ -83,8 +83,16 @@ namespace Particle_Swarm_Optimization.PSO
             UpdateFitness();
         }
 
-        public abstract void UpdatePosition();
-        
+        public void UpdatePosition()
+        {
+            for (int i = 0; i < Parameters.DIMENSION_AMOUNT; i++)
+            {
+                Position[i] += Velocity[i];
+            }
+
+            constriction.UpdateParameter();
+        }
+
         public static List<AbstractParticle> CreateSwarm(ETopology topology, EFunction function, EConstrictionFactor constrictionFactor, int particleAmmount)
         {
             List<AbstractParticle> swarm = new List<AbstractParticle>();

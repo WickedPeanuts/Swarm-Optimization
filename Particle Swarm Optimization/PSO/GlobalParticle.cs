@@ -15,16 +15,6 @@ namespace Particle_Swarm_Optimization.PSO
         {
         }
 
-        public override void UpdatePosition()
-        {
-            for (int i = 0; i< Parameters.DIMENSION_AMOUNT; i++)
-            {
-                Position[i] += Velocity[i];
-            }
-
-            constriction.UpdateParameter();
-        }
-
         public override void UpdateSpeed()
         {
             for (int i = 0; i < Parameters.DIMENSION_AMOUNT; i++)
