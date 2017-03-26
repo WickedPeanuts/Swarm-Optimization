@@ -1,6 +1,7 @@
 ﻿using Particle_Swarm_Optimization;
 using Particle_Swarm_Optimization.ConstrictionFactor;
 using Particle_Swarm_Optimization.FitnessFunction;
+using Particle_Swarm_Optimization.PSO;
 using PSO.Enum;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PSO
+namespace Particle_Swarm_Optimization.PSO
 {
     public abstract class AbstractParticle
     {
@@ -34,17 +35,20 @@ namespace PSO
             PositionGBest = null;
         }
         
-        public AbstractParticle(EFunction functionType, EConstrictionFactor parameter)
+        public AbstractParticle(EFunction functionType, EConstrictionFactor constrictionType)
         {
-            if (parameter == EConstrictionFactor.FixedInertia)
+            this.functionType = functionType;
+            this.constrictionType = constrictionType;
+
+            if (constrictionType == EConstrictionFactor.FixedInertia)
                 constriction = new FixedInertia();
-            else if (parameter == EConstrictionFactor.FloatingInertia)
+            else if (constrictionType == EConstrictionFactor.FloatingInertia)
                 constriction = new FloatingInertia();
             else
                 constriction = new ClercConstriction();
 
-            Position = new double[Parameters.DIMENSION_AMMOUNT];
-            Velocity = new double[Parameters.DIMENSION_AMMOUNT];
+            Position = new double[Parameters.DIMENSION_AMOUNT];
+            Velocity = new double[Parameters.DIMENSION_AMOUNT];
 
             if (functionType == EFunction.Sphere)
                 function = new SphereFunction();
@@ -85,29 +89,28 @@ namespace PSO
         {
             List<AbstractParticle> swarm = new List<AbstractParticle>();
 
-            switch (topology)
+            for (int i = 0; i < particleAmmount; i++)
             {
-                case (ETopology.Local):
-                    break;
-                case (ETopology.Global):
-
-                    for (int i = 0; i < particleAmmount; i++)
-                    {
-                        swarm.Add(new GlobalParticle(function, constrictionFactor, swarm));
-                    }
-
-                    break;
-
-                case (ETopology.Focal):
-                    break;
+                if (topology == ETopology.Local)
+                {
+                    swarm.Add(new LocalParticle(function, constrictionFactor, swarm));
+                }
+                else if (topology == ETopology.Global)
+                {
+                    swarm.Add(new GlobalParticle(function, constrictionFactor));
+                }
+                else if (topology == ETopology.Focal)
+                {
+                    swarm.Add(new FocalParticle(function, constrictionFactor, swarm, i == 0));
+                }
             }
-
+               
             return swarm;
         }
 
         public void ForceBoundaries()
         {
-            for (int i = 0; i < Parameters.DIMENSION_AMMOUNT; i++)
+            for (int i = 0; i < Parameters.DIMENSION_AMOUNT; i++)
             {
                 if (Position[i] > function.BOUNDARY_MAX)
                     Position[i] = function.BOUNDARY_MAX;

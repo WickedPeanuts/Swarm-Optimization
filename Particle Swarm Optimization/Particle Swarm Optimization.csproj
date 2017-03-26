@@ -57,6 +57,8 @@
     <Compile Include="PSO\Enum\EFunction.cs" />
     <Compile Include="PSO\Enum\EConstrictionFactor.cs" />
     <Compile Include="PSO\Enum\ETopology.cs" />
+    <Compile Include="PSO\FocalParticle.cs" />
+    <Compile Include="PSO\LocalParticle.cs" />
     <Compile Include="PSO\GlobalParticle.cs" />
     <Compile Include="PSO\Swarm.cs" />
   </ItemGroup>

@@ -8,7 +8,7 @@ namespace Particle_Swarm_Optimization.ConstrictionFactor
 {
     public class FloatingInertia : AbstractConstrictionFactor
     {
-        private static readonly double InertiaFactor = 0.5 / Parameters.ITERATION_AMMOUNT;
+        private static readonly double InertiaFactor = 0.5 / Parameters.ITERATION_AMOUNT;
         private double Inertia = 0.9d;
 
         public override double CalculateVelocity(double velocity, double random1, double random2, double position, double positionGlobalBest, double positionPersonalBest)

@@ -7,22 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PSO
+namespace Particle_Swarm_Optimization.PSO
 {
     class GlobalParticle : AbstractParticle
     {
-        public List<AbstractParticle> Swarm { get; set; }
-        
-        public GlobalParticle(EFunction function, EConstrictionFactor constrictionFactor, List<AbstractParticle> swarm) : base(function, constrictionFactor)
+        public GlobalParticle(EFunction functionType, EConstrictionFactor constrictionType) : base(functionType, constrictionType)
         {
-            this.functionType = function;
-            this.constrictionType = constrictionFactor;
-            this.Swarm = swarm;
         }
 
         public override void UpdatePosition()
         {
-            for (int i = 0; i< Parameters.DIMENSION_AMMOUNT; i++)
+            for (int i = 0; i< Parameters.DIMENSION_AMOUNT; i++)
             {
                 Position[i] += Velocity[i];
             }
@@ -32,9 +27,13 @@ namespace PSO
 
         public override void UpdateSpeed()
         {
-            for (int i = 0; i < Parameters.DIMENSION_AMMOUNT; i++)
+            for (int i = 0; i < Parameters.DIMENSION_AMOUNT; i++)
             {
-                Velocity[i] = constriction.CalculateVelocity(Velocity[i], random.NextDouble(), random.NextDouble(), Position[i], PositionGBest[i], PositionPBest[i]);
+                Velocity[i] = constriction.CalculateVelocity
+                    (
+                    Velocity[i], random.NextDouble(), random.NextDouble(),
+                    Position[i], PositionGBest[i], PositionPBest[i]
+                    );
             }
         }
     }
