@@ -11,27 +11,24 @@ namespace Particle_Swarm_Optimization.PSO
 {
     class LocalParticle : AbstractParticle
     {
-        private List<AbstractParticle> swarm;
+        private List<AbstractParticle> neighbors;
 
-        public LocalParticle(EFunction functionType, EConstrictionFactor parameter, List<AbstractParticle> swarm) : base(functionType, parameter)
+        public LocalParticle(EFunction functionType, EConstrictionFactor parameter) : base(functionType, parameter)
         {
-            this.swarm = swarm;
+        }
+
+        public void LinkSwarm(List<AbstractParticle> swarm, int index)
+        {
+            neighbors = new List<AbstractParticle>();
+            neighbors.Add(this);
+            neighbors.Add(swarm[(index > 0 ? index - 1 : swarm.Count - 1)]);
+            neighbors.Add(swarm[(index + 1 < swarm.Count ? index + 1 : 0)]);
         }
 
         public override void UpdateSpeed()
         {
-            //Ordenar enxame por distancia
-            swarm.OrderBy(x => AbstractFunction.EuclidianDistance(this.Position, x.Position));
-            AbstractParticle bestParticle = swarm[0];
-
             //Selecionar partícula mais "relevante"
-            for (int i = 2; i < Parameters.FOCAL_ADJACENT_PARTICLES; i++)
-            {
-                if (swarm[i].PersonalBest < bestParticle.PersonalBest)
-                {
-                    bestParticle = swarm[i];
-                }
-            }
+            AbstractParticle bestParticle = neighbors.OrderBy(x => x.PersonalBest).First();
 
             //Fazer as matemágicas
             for (int i = 0; i<Parameters.DIMENSION_AMOUNT; i++)
@@ -39,7 +36,7 @@ namespace Particle_Swarm_Optimization.PSO
                 Velocity[i] = constriction.CalculateVelocity
                     (
                     Velocity[i], random.NextDouble(), random.NextDouble(), 
-                    Position[i], PositionGBest[i], bestParticle.Position[i]
+                    Position[i], bestParticle.PositionPBest[i], PositionPBest[i]
                     );
             }
         }

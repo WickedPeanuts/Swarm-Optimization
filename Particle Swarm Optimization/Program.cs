@@ -19,7 +19,7 @@ namespace Particle_Swarm_Optimization
             //Global
             //BeginSimulation(ETopology.Global, EFunction.Sphere, EConstrictionFactor.FixedInertia, i++);
             //BeginSimulation(ETopology.Global, EFunction.Sphere, EConstrictionFactor.FloatingInertia, i++);
-            //BeginSimulation(ETopology.Global, EFunction.Sphere, EConstrictionFactor.ClercConstriction, i++);
+            BeginSimulation(ETopology.Global, EFunction.Sphere, EConstrictionFactor.ClercConstriction, 0);
 
             //BeginSimulation(ETopology.Global, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia, i++);
             //BeginSimulation(ETopology.Global, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia, i++);
@@ -55,7 +55,7 @@ namespace Particle_Swarm_Optimization
             //BeginSimulation(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia, i++);
             //BeginSimulation(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
 
-            //Console.ReadKey();
+            Console.ReadKey();
         }
 
         public static void BeginSimulation(ETopology top, EFunction fun, EConstrictionFactor cons, int id)

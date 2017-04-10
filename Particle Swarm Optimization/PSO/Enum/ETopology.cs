@@ -9,7 +9,7 @@ namespace PSO.Enum
     public enum ETopology
     {
         Global = 1,
-        Local = 2,
+        Ring = 2,
         Focal = 3,
     }
 }

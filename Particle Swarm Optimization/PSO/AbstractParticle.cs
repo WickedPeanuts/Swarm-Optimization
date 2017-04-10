@@ -99,9 +99,9 @@ namespace Particle_Swarm_Optimization.PSO
 
             for (int i = 0; i < particleAmmount; i++)
             {
-                if (topology == ETopology.Local)
+                if (topology == ETopology.Ring)
                 {
-                    swarm.Add(new LocalParticle(function, constrictionFactor, swarm));
+                    swarm.Add(new LocalParticle(function, constrictionFactor));
                 }
                 else if (topology == ETopology.Global)
                 {
@@ -110,6 +110,14 @@ namespace Particle_Swarm_Optimization.PSO
                 else if (topology == ETopology.Focal)
                 {
                     swarm.Add(new FocalParticle(function, constrictionFactor, swarm, i == 0));
+                }
+            }
+
+            if (topology == ETopology.Ring)
+            {
+                for(int i = 0; i < swarm.Count; i++)
+                {
+                    ((LocalParticle)swarm[i]).LinkSwarm(swarm, i);
                 }
             }
                
