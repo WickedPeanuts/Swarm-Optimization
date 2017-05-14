@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Swarm_Optimization.FitnessFunction.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Particle_Swarm_Optimization.FitnessFunction
+namespace Swarm_Optimization.FitnessFunction
 {
     public abstract class AbstractFunction
     {
@@ -23,6 +24,16 @@ namespace Particle_Swarm_Optimization.FitnessFunction
             }
 
             return Math.Sqrt(sum);
+        }
+
+        public static AbstractFunction InstanceFunction(EFunction functionType)
+        {
+            if (functionType == EFunction.Sphere)
+                return new SphereFunction();
+            else if (functionType == EFunction.RotatedRastrigin)
+                return new RotatedRastrigin();
+            else
+                return new Rosenbrock();
         }
     }
 }

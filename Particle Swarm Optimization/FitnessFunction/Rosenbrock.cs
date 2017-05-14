@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Particle_Swarm_Optimization.FitnessFunction
+namespace Swarm_Optimization.FitnessFunction
 {
     class Rosenbrock : AbstractFunction
     {
         public override float BOUNDARY_MAX { get { return 2; } }
-
         public override float BOUNDARY_MIN { get { return -2; } }
 
         public override double CalculateFitness(double[] position)

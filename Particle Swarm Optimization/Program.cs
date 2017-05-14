@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Particle_Swarm_Optimization.Common;
+using Particle_Swarm_Optimization.Enum;
+using Particle_Swarm_Optimization.Firefly_Algorithm;
+using Particle_Swarm_Optimization.Particle_Swarm_Optimization;
+using Swarm_Optimization.FitnessFunction.Enum;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PSO;
-using PSO.Enum;
-using Particle_Swarm_Optimization.PSO;
-using Particle_Swarm_Optimization.FitnessFunction;
 
 namespace Particle_Swarm_Optimization
 {
@@ -14,62 +12,87 @@ namespace Particle_Swarm_Optimization
     {
         static void Main(string[] args)
         {
-            //int i = 0;
+            int i = 0;
 
+            #region PSO
             //Global
-            //BeginSimulation(ETopology.Global, EFunction.Sphere, EConstrictionFactor.FixedInertia, i++);
-            //BeginSimulation(ETopology.Global, EFunction.Sphere, EConstrictionFactor.FloatingInertia, i++);
-            BeginSimulation(ETopology.Global, EFunction.Sphere, EConstrictionFactor.ClercConstriction, 0);
+            //BeginSimulationPSO(ETopology.Global, EFunction.Sphere, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulationPSO(ETopology.Global, EFunction.Sphere, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulationPSO(ETopology.Global, EFunction.Sphere, EConstrictionFactor.ClercConstriction, i++);
 
-            //BeginSimulation(ETopology.Global, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia, i++);
-            //BeginSimulation(ETopology.Global, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia, i++);
-            //BeginSimulation(ETopology.Global, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction, i++);
+            //BeginSimulationPSO(ETopology.Global, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulationPSO(ETopology.Global, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulationPSO(ETopology.Global, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction, i++);
 
-            //BeginSimulation(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia, i++);
-            //BeginSimulation(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia, i++);
-            ///BeginSimulation(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
+            //BeginSimulationPSO(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulationPSO(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulationPSO(ETopology.Global, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
 
             //Local
-            //BeginSimulation(ETopology.Local, EFunction.Sphere, EConstrictionFactor.FixedInertia, 1);
-            //BeginSimulation(ETopology.Local, EFunction.Sphere, EConstrictionFactor.FloatingInertia, i++);
-            //BeginSimulation(ETopology.Local, EFunction.Sphere, EConstrictionFactor.ClercConstriction, i++);
-            
-            //BeginSimulation(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia, i++);
-            //BeginSimulation(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia, i++);
-            //BeginSimulation(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction, i++);
+            //BeginSimulationPSO(ETopology.Local, EFunction.Sphere, EConstrictionFactor.FixedInertia, 1);
+            //BeginSimulationPSO(ETopology.Local, EFunction.Sphere, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulationPSO(ETopology.Local, EFunction.Sphere, EConstrictionFactor.ClercConstriction, i++);
 
-            //BeginSimulation(ETopology.Local, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia, i++);
-            //BeginSimulation(ETopology.Local, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia, i++);
-            //BeginSimulation(ETopology.Local, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
+            //BeginSimulationPSO(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulationPSO(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulationPSO(ETopology.Local, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction, i++);
+
+            //BeginSimulationPSO(ETopology.Local, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulationPSO(ETopology.Local, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulationPSO(ETopology.Local, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
 
             //Focal
-            //BeginSimulation(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.FixedInertia, i++);
-            //BeginSimulation(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.FloatingInertia, i++);
-            //BeginSimulation(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.ClercConstriction, i++);
+            //BeginSimulationPSO(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulationPSO(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulationPSO(ETopology.Focal, EFunction.Sphere, EConstrictionFactor.ClercConstriction, i++);
 
-            //BeginSimulation(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia, i++);
-            //BeginSimulation(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia, i++);
-            //BeginSimulation(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction, i++);
-            
-            //BeginSimulation(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia, i++);
-            //BeginSimulation(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia, i++);
-            //BeginSimulation(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
+            //BeginSimulationPSO(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulationPSO(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulationPSO(ETopology.Focal, EFunction.RotatedRastrigin, EConstrictionFactor.ClercConstriction, i++);
+
+            //BeginSimulationPSO(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.FixedInertia, i++);
+            //BeginSimulationPSO(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.FloatingInertia, i++);
+            //BeginSimulationPSO(ETopology.Focal, EFunction.Rosenbrock, EConstrictionFactor.ClercConstriction, i++);
+            #endregion PSO
+
+            #region FFA
+
+            BeginSimulationFFA(EFunction.Sphere, i++);
+
+            #endregion FFA
 
             Console.ReadKey();
         }
 
-        public static void BeginSimulation(ETopology top, EFunction fun, EConstrictionFactor cons, int id)
+        public static void BeginSimulationFFA(EFunction fun, int id)
         {
             List<List<Double>> lld = new List<List<Double>>();
             for (int i = 0; i < Parameters.SAMPLE_COUNT; i++)
             {
-                Swarm s = (new Swarm(top, fun, cons));
+                Firefly_Algorithm.Swarm s = (new Firefly_Algorithm.Swarm(fun));
+                s.InitializeSwarm();
+
+                s.UpdatePopulation(true);
+
+                lld.Add(s.GlobalBestLog);
+
+                Console.WriteLine("Iteração " + i + ": GBest: " + FireflyParticle.GlobalBest);
+            }
+            SaveToFile2(ETopology.Global, fun, EConstrictionFactor.FixedInertia, lld, id);
+        }
+
+        public static void BeginSimulationPSO(ETopology top, EFunction fun, EConstrictionFactor cons, int id)
+        {
+            List<List<Double>> lld = new List<List<Double>>();
+            for (int i = 0; i < Parameters.SAMPLE_COUNT; i++)
+            {
+                Particle_Swarm_Optimization.Swarm s = (new Particle_Swarm_Optimization.Swarm(top, fun, cons));
                 s.InitializeSwarm();
                 s.UpdatePopulation(true);
 
                 lld.Add(s.GlobalBestLog);
 
-                Console.WriteLine("Iteração " + i + ": GBest: " + AbstractParticle.GlobalBest);
+                Console.WriteLine("Iteração " + i + ": GBest: " + AbstractPSOParticle.GlobalBest);
             }
 
 

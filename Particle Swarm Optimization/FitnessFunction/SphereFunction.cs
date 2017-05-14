@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Particle_Swarm_Optimization.FitnessFunction
+namespace Swarm_Optimization.FitnessFunction
 {
     class SphereFunction : AbstractFunction
     {
